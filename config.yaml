@@ -1,0 +1,38 @@
+mysql:
+  path: 10.10.1.100
+  port: 3366
+  config: charset=utf8mb4&parseTime=True&loc=Local
+  db-name: gra
+  username: root
+  password: Stan2021
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-mode: error
+  log-zap: false
+
+zap:
+  level: info
+  format: console
+  prefix: '[gin-react-admin]'
+  director: log
+  showLine: true
+  encode-level: LowercaseColorLevelEncoder
+  stacktrace-key: stacktrace
+  log-in-console: true
+
+timer:
+  start: true
+  spec: '@daily'
+  detail:
+    - tableName: sys_operation_records
+      compareField: created_at
+      interval: 2160h
+    - tableName: jwt_blacklists
+      compareField: created_at
+      interval: 168h
+
+jwt:
+  buffer-time: 86400
+  expires-time: 604800
+  issuer: qmPlus
+  signing-key: 1088e13c-77fb-4fa7-b6e0-c8167d138b26
